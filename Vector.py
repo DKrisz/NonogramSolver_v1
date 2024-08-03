@@ -17,12 +17,18 @@ class Vector:
 
 		self.start_idx = start_idx if start_idx >= 0 else 0
 		self.end_idx = end_idx if end_idx >= 0 else self.start_idx + length
-		self.children = []
+		self.children: list[Vector] = []
 		self.open = True
 		self.column = column
+		self.subVLengths = []
 
 	def AddSubVector(self, newVector) -> None:
 		self.children.append(newVector)
+		self.UpdateSubVLengths()
+
+	def UpdateSubVLengths(self):
+		for child in self.children:
+			self.subVLengths.append(child.length)
 
 
 class VectorProcessing:
